@@ -6,6 +6,9 @@ include:
 rabbitmq-server:
   pkg.installed:
     - name: {{ pkgs['rabbitmq-server'] }}
+  {% if salt["pillar.get"]("rabbitmq:version") %}
+    - version: {{ salt['pillar.get']('rabbitmq:version') }}
+  {% endif %}
   service:
     - running
     - enable: True
